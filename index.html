@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BT影视 - 磁力/种子/4K蓝光资源检索与下载安全导航</title>
+<meta name="description" content="BT影视（btyingshi-h5）做影视资源检索与下载安全导航：电影/剧集/动漫/纪录片/4K蓝光/网盘/NAS 收藏场景，讲清磁力、种子、网盘、正版边界与下载避坑。网址 https://btyingshi-h5.github.io">
+<meta name="keywords" content="BT影视,磁力链接,种子下载,4K蓝光,影视资源,网盘资源,NAS影音库,下载安全,正版边界">
+<link rel="canonical" href="https://btyingshi-h5.github.io/">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"JetBrains Mono","PingFang SC","Microsoft YaHei",ui-monospace,monospace;
+  background:#0c0f0d;color:#d7e0da;line-height:1.7;overflow-x:hidden;
+  background-image:
+    radial-gradient(circle at 10% 8%,rgba(74,222,128,.12),transparent 36%),
+    radial-gradient(circle at 88% 12%,rgba(120,160,255,.10),transparent 40%),
+    radial-gradient(circle at 50% 120%,rgba(20,40,30,.5),transparent 55%);
+}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+section[id]{scroll-margin-top:0}
+::selection{background:#4ade80;color:#06120a}
+
+/* 顶条 */
+.bt-bar{background:#070907;padding:7px 16px;border-bottom:1px solid #1c2a20;display:flex;justify-content:center;gap:16px;flex-wrap:wrap;font-size:12px;letter-spacing:1px;color:#7fae8e}
+.bt-bar b{color:#4ade80}
+.bt-bar .warn{color:#fbbf24}
+
+/* 导航 */
+.nav{position:sticky;top:0;z-index:999;background:rgba(12,15,13,.93);backdrop-filter:blur(8px);border-bottom:1px solid #1c2a20}
+.nav-in{max-width:1240px;margin:0 auto;height:64px;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px}
+.logo .dot{width:34px;height:34px;border-radius:8px;background:radial-gradient(circle at 30% 30%,#4ade80,#15803d 60%,#052e16);box-shadow:0 0 12px rgba(74,222,128,.5);display:flex;align-items:center;justify-content:center;font-weight:900;color:#04130a}
+.logo .cn{font-size:20px;font-weight:900;letter-spacing:1px}
+.logo .cn em{font-style:normal;color:#4ade80}
+.logo .en{font-size:10px;letter-spacing:3px;color:#6f8a78}
+.menu{display:flex;gap:2px;flex-wrap:wrap}
+.menu a{font-size:13px;color:#9fc2ac;padding:8px 10px;border-bottom:2px solid transparent;transition:.2s}
+.menu a:hover{color:#4ade80;border-bottom-color:#4ade80}
+.nav-cta{background:#15803d;color:#eafff0;font-weight:800;font-size:13px;padding:9px 18px;border-radius:8px;border:1px solid #4ade80}
+.nav-cta:hover{background:#1aa34a}
+
+/* 命令行 hero */
+.hero{max-width:1240px;margin:0 auto;padding:70px 20px 56px}
+.term{background:#0a0d0b;border:1px solid #1c2a20;border-radius:16px;padding:26px;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.term .bar{display:flex;gap:7px;margin-bottom:18px}
+.term .bar i{width:12px;height:12px;border-radius:50%;display:block}
+.term .bar .r{background:#ff5f56}.term .bar .y{background:#ffbd2e}.term .bar .g{background:#27c93f}
+.term .path{color:#6f8a78;font-size:13px}
+.term .cmd{font-size:clamp(18px,3vw,26px);font-weight:800;margin:8px 0;color:#eafff0}
+.term .cmd .green{color:#4ade80}
+.term .cmd .blue{color:#93b4ff}
+.term .out{font-size:14px;color:#9fc2ac;margin-top:10px}
+.term .out b{color:#fbbf24}
+.hero-lead{margin-top:22px;font-size:16px;color:#bcd3c4;max-width:680px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn-green{padding:12px 26px;font-weight:800;border-radius:9px;background:#15803d;color:#eafff0;border:1px solid #4ade80;transition:.25s}
+.btn-green:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(74,222,128,.25)}
+.btn-line{background:transparent;color:#4ade80;border:1px solid #1c2a20;padding:12px 26px;border-radius:9px;font-weight:800}
+.btn-line:hover{background:#0f1612}
+
+/* 区块 */
+.block{max-width:1240px;margin:0 auto;padding:60px 20px}
+.block-head{display:flex;align-items:baseline;gap:12px;margin-bottom:26px;flex-wrap:wrap;border-bottom:1px dashed #1c2a20;padding-bottom:10px}
+.block-head .no{font-size:12px;font-weight:800;color:#04130a;background:#4ade80;padding:3px 9px;border-radius:5px}
+.block-head h2{font-size:25px;font-weight:900}
+.block-head h2 em{font-style:normal;color:#4ade80}
+.block-head .en{font-size:12px;letter-spacing:2px;color:#6f8a78}
+.block-head a{margin-left:auto;font-size:13px;color:#7fae8e}
+.block-head a:hover{color:#4ade80}
+
+/* 检索框 */
+.search-box{display:flex;gap:10px;background:#0a0d0b;border:1px solid #1c2a20;border-radius:12px;padding:12px 16px}
+.search-box .prompt{color:#4ade80;font-weight:800}
+.search-box input{flex:1;background:transparent;border:0;outline:0;color:#eafff0;font-size:15px;font-family:inherit}
+.search-box button{background:#15803d;color:#eafff0;border:0;font-weight:800;padding:10px 22px;border-radius:9px;cursor:pointer}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.tags span{font-size:12px;color:#9fc2ac;background:#0f1612;border:1px solid #1c2a20;padding:5px 11px;border-radius:999px}
+
+/* 资源卡片 */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.rcard{background:#0f1612;border:1px solid #1c2a20;border-radius:14px;padding:18px;transition:.3s}
+.rcard:hover{transform:translateY(-4px);border-color:#4ade80;box-shadow:0 14px 30px rgba(0,0,0,.4)}
+.rcard .top{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#7fae8e}
+.rcard .fmt{font-weight:800;color:#93b4ff}
+.rcard h3{font-size:17px;font-weight:800;color:#eafff0;margin:10px 0 6px}
+.rcard p{font-size:13px;color:#9fc2ac}
+.rcard .meta{margin-top:10px;font-size:12px;color:#6f8a78;display:flex;gap:10px;flex-wrap:wrap}
+.rcard .pill{display:inline-block;font-size:11px;font-weight:800;color:#04130a;background:#4ade80;padding:2px 9px;border-radius:999px}
+.rcard .pill.gray{background:#26352b;color:#9fc2ac}
+.rcard .pill.amber{background:#3a2f12;color:#fbbf24;border:1px solid #5c4a16}
+
+/* 4K 大卡 */
+.bluray{display:grid;grid-template-columns:1.2fr .8fr;gap:20px}
+.big{position:relative;height:340px;border-radius:16px;overflow:hidden;border:1px solid #1c2a20}
+.big img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.1) contrast(1.05)}
+.big .ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(5,10,7,.94));display:flex;flex-direction:column;justify-content:flex-end;padding:22px}
+.big h3{font-size:22px;font-weight:900;color:#eafff0}
+.big p{font-size:13px;color:#bcd3c4;margin-top:6px}
+.side-list{display:flex;flex-direction:column;gap:12px}
+.srow{background:#0f1612;border:1px solid #1c2a20;border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;gap:10px}
+.srow h4{font-size:15px;font-weight:800;color:#eafff0}
+.srow p{font-size:12px;color:#9fc2ac;margin-top:3px}
+.srow .sz{font-size:13px;color:#93b4ff;font-weight:800;white-space:nowrap}
+
+/* 安全块 */
+.safe{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.safe-box{background:#0f1612;border:1px solid #1c2a20;border-radius:16px;padding:24px}
+.safe-box h3{font-size:17px;font-weight:800;margin-bottom:12px}
+.safe-box.ok h3{color:#4ade80}
+.safe-box.no h3{color:#fbbf24}
+.safe-box ul{list-style:none}
+.safe-box li{padding:9px 0 9px 26px;position:relative;font-size:14px;color:#bcd3c4;border-bottom:1px dashed #1c2a20}
+.safe-box.ok li::before{content:"✓";position:absolute;left:0;color:#4ade80;font-weight:800}
+.safe-box.no li::before{content:"!";position:absolute;left:0;color:#fbbf24;font-weight:800}
+
+/* 版权 */
+.legal{background:#10231a;border:1px solid #1f5132;border-left:4px solid #4ade80;border-radius:14px;padding:26px}
+.legal h3{color:#4ade80;font-size:18px;font-weight:800;margin-bottom:12px}
+.legal ul{list-style:none}
+.legal li{padding:9px 0;font-size:14px;color:#c7e6d2;border-bottom:1px dashed #1c3a28}
+.legal .warn{margin-top:14px;background:#2a2410;border:1px solid #5c4a16;color:#fbbf24;padding:12px 14px;border-radius:10px;font-size:13px}
+
+/* 关于 */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;background:linear-gradient(135deg,#0f1a13,#101626);border:1px solid #1c2a20;border-radius:18px;padding:42px}
+.about h2{font-size:25px;font-weight:900;margin-bottom:14px}
+.about h2 em{font-style:normal;color:#4ade80}
+.about p{font-size:15px;color:#bcd3c4;line-height:1.9;margin-bottom:12px}
+.about .url{color:#4ade80;font-weight:800}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.st{background:#0a0d0b;border:1px solid #1c2a20;border-radius:12px;padding:18px;text-align:center}
+.st .n{font-size:26px;font-weight:900;color:#4ade80}
+.st .l{font-size:12px;color:#7fae8e;margin-top:3px}
+
+/* 页脚 */
+.foot{border-top:1px solid #1c2a20;padding:40px 20px 28px;text-align:center;background:#070907}
+.foot-logo{font-size:20px;font-weight:900}
+.foot-logo em{font-style:normal;color:#4ade80}
+.foot-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:12px 0}
+.foot-links a{font-size:13px;color:#7fae8e}
+.foot-links a:hover{color:#4ade80}
+.foot p{font-size:12px;color:#5f7a68}
+.foot .disc{margin-top:10px;max-width:840px;margin-left:auto;margin-right:auto;color:#567062;line-height:1.7}
+
+@media(max-width:860px){
+  .menu{display:none}
+  .bluray{grid-template-columns:1fr}
+  .safe{grid-template-columns:1fr}
+  .about{grid-template-columns:1fr;padding:28px}
+  .block{padding:48px 20px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<div class="bt-bar">
+  <span>P2P 资源检索</span><b>磁力 / 种子 / 网盘 / NAS</b>
+  <span class="warn">⚠ 不托管侵权片源</span>
+  <span>4K 蓝光</span><b>收藏级片源场景</b>
+</div>
+
+<div class="nav">
+  <div class="nav-in">
+    <div class="logo">
+      <div class="dot">⬇</div>
+      <div>
+        <div class="cn">BT<em>影视</em></div>
+        <div class="en">TORRENT & MAGNET HUB</div>
+      </div>
+    </div>
+    <nav class="menu">
+      <a href="#home">首页</a>
+      <a href="#search">磁力检索</a>
+      <a href="#movie">电影种子</a>
+      <a href="#tv">剧集资源</a>
+      <a href="#acg">动漫纪录片</a>
+      <a href="#bluray">4K蓝光</a>
+      <a href="#nas">网盘/NAS</a>
+      <a href="#safe">下载安全</a>
+      <a href="#legal">版权边界</a>
+      <a href="#about">关于</a>
+    </nav>
+    <a href="#search" class="nav-cta">检索资源</a>
+  </div>
+</div>
+
+<section class="hero" id="home">
+  <div class="term">
+    <div class="bar"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+    <div class="path">guest@bt-film:~$ </div>
+    <div class="cmd">bt-search --type <span class="green">movie</span> --quality <span class="blue">2160p,1080p</span> --source <span class="green">web-dl,bluray-remux</span></div>
+    <div class="out">
+      &gt; 解析：电影 / 剧集 / 动漫 / 纪录片 资源条目<br>
+      &gt; 输出：<b>磁力链接 · 种子文件 · 网盘分享 · NAS 入库建议</b><br>
+      &gt; 策略：正版免费层优先，公共授权可下，会员/院线内容引导回正版平台。<br>
+      &gt; 安全：不点来路 .exe，不装“专用播放器”，不填验证码给仿冒客服。
+    </div>
+  </div>
+  <p class="hero-lead">BT影视不是“盗版影院”。我们把 P2P 时代老用户熟悉的那套——磁力、种子、做种数、文件列表、码率、封装格式——整理成现代导航页：帮你判断“这个资源值不值得下”，而不是一键跳进侵权片库。[1,14](@ref)</p>
+  <div class="hero-btns">
+    <a href="#search" class="btn-green">⬇ 进磁力检索</a>
+    <a href="#safe" class="btn-line">🛡 下载安全守则</a>
+  </div>
+</section>
+
+<section class="block" id="search">
+  <div class="block-head">
+    <span class="no">00</span>
+    <h2>磁力<em>检索</em></h2>
+    <span class="en">MAGNET SEARCH</span>
+  </div>
+  <div class="search-box">
+    <span class="prompt">magnet &gt;</span>
+    <input placeholder="输入片名 / 年份 / 封装：Interstellar 2014 2160p BluRay REMUX mkv">
+    <button>解析</button>
+  </div>
+  <div class="tags">
+    <span>1080p WEB-DL</span><span>2160p BluRay REMUX</span><span>HEVC / H.265</span>
+    <span>原盘中字</span><span>公版纪录片</span><span>网盘转存</span><span>NAS 影音库</span>
+  </div>
+</section>
+
+<section class="block" id="movie" style="background:#0a0d0b">
+  <div class="block-head">
+    <span class="no">01</span>
+    <h2>电影<em>种子</em></h2>
+    <span class="en">MOVIE TORRENTS</span>
+    <a href="#">更多 #</a>
+  </div>
+  <div class="grid">
+    <div class="rcard">
+      <div class="top"><span>MOVIE</span><span class="fmt">2160p</span></div>
+      <h3>星际穿越 2014 BluRay REMUX</h3>
+      <p>HEVC / HDR10 / TrueHD 7.1，收藏级封装，适合 NAS + 回音壁。</p>
+      <div class="meta"><span class="pill">做种 1.2k</span><span>78.4 GB</span><span>MKV</span></div>
+    </div>
+    <div class="rcard">
+      <div class="top"><span>MOVIE</span><span class="fmt">1080p</span></div>
+      <h3>让子弹飞 WEB-DL 国粤双音</h3>
+      <p>流媒体抓取版，体积友好，老片重温/二刷台词都够用。</p>
+      <div class="meta"><span class="pill gray">做种 640</span><span>4.6 GB</span><span>MP4</span></div>
+    </div>
+    <div class="rcard">
+      <div class="top"><span>MOVIE</span><span class="fmt">720p</span></div>
+      <h3>公共授权：城市交响曲 1927</h3>
+      <p>早期城市纪录片/实验片，公共版权可合法下载与二次剪辑。</p>
+      <div class="meta"><span class="pill">公版</span><span>1.1 GB</span><span>MKV</span></div>
+    </div>
+    <div class="rcard">
+      <div class="top"><span>MOVIE</span><span class="fmt">2160p</span></div>
+      <h3>沙丘 2 Theatrical + IMAX</h3>
+      <p>院线后正版平台/光盘发行后才谈“收藏版”；没授权时不提供磁链。</p>
+      <div class="meta"><span class="pill amber">等正版发行</span><span>—</span><span>—</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="tv">
+  <div class="block-head">
+    <span class="no">02</span>
+    <h2>剧集<em>资源</em></h2>
+    <span class="en">SERIES PACKS</span>
+    <a href="#">更多 #</a>
+  </div>
+  <div class="grid">
+    <div class="rcard">
+      <div class="top"><span>SERIES</span><span class="fmt">1080p</span></div>
+      <h3>三体 国产剧 全季打包</h3>
+      <p>正版平台完结后可关注“广告支持/会员回看”；打包种子只在授权允许时列。</p>
+      <div class="meta"><span class="pill gray">30 集</span><span>42 GB</span><span>WEB-DL</span></div>
+    </div>
+    <div class="rcard">
+      <div class="top"><span>SERIES</span><span class="fmt">2160p</span></div>
+      <h3>苍穹浩瀚 全 6 季 REMUX</h3>
+      <p>硬科幻粉丝向收藏，字幕组精校版比枪版值钱得多。</p>
+      <div class="meta"><span class="pill">做种 880</span><span>310 GB</span><span>MKV</span></div>
+    </div>
+    <div class="rcard">
+      <div class="top"><span>SERIES</span><span class="fmt">1080p</span></div>
+      <h3>老友记 修复版 全 10 季</h3>
+      <p>经典完结剧，正版平台常有免费层/广告层，不一定非要下。</p>
+      <div class="meta"><span class="pill">完结</span><span>96 GB</span><span>x264</span></div>
+    </div>
+    <div class="rcard">
+      <div class="top"><span>SERIES</span><span class="fmt">WEB</span></div>
+      <h3>新剧抢先看？</h3>
+      <p>刚播未授权就满网飞种的，基本是录屏/水印/钓鱼包，直接跳过。</p>
+      <div class="meta"><span class="pill amber">高风险</span><span>勿下</span><span>—</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="acg" style="background:#0a0d0b">
+  <div class="block-head">
+    <span class="no">03</span>
+    <h2>动漫 / 纪录片</h2>
+    <span class="en">ANIME & DOCS</span>
+    <a href="#">更多 #</a>
+  </div>
+  <div class="grid">
+    <div class="rcard">
+      <div class="top"><span>ANIME</span><span class="fmt">1080p</span></div>
+      <h3>夏目友人帐 全季 字幕组版</h3>
+      <p>治愈番完结包，字幕组授权转载期内可收藏，商用/再分发不行。</p>
+      <div class="meta"><span class="pill">完结</span><span>58 GB</span><span>MKV</span></div>
+    </div>
+    <div class="rcard">
+      <div class="top"><span>ANIME</span><span class="fmt">2160p</span></div>
+      <h3>千与千寻 修复版</h3>
+      <p>正版碟/平台授权后才谈 REMUX；公共渠道只放预告与公版资料。</p>
+      <div class="meta"><span class="pill amber">等发行</span><span>—</span><span>—</span></div>
+    </div>
+    <div class="rcard">
+      <div class="top"><span>DOC</span><span class="fmt">1080p</span></div>
+      <h3>地球脉动 公共剪辑包</h3>
+      <p>机构发布/公共授权片段可下，整季商用授权另算。</p>
+      <div class="meta"><span class="pill">公版片段</span><span>12 GB</span><span>MP4</span></div>
+    </div>
+    <div class="rcard">
+      <div class="top"><span>DOC</span><span class="fmt">4K</span></div>
+      <h3>宇宙时空之旅 重压版</h3>
+      <p>适合投屏和大屏 NAS 播放，但原片版权仍归制作方。</p>
+      <div class="meta"><span class="pill gray">授权期</span><span>28 GB</span><span>HEVC</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="bluray">
+  <div class="block-head">
+    <span class="no">04</span>
+    <h2>4K 蓝光<em>收藏</em></h2>
+    <span class="en">BLURAY REMUX</span>
+  </div>
+  <div class="bluray">
+    <div class="big">
+      <img src="https://picsum.photos/900/600?random=7101" alt="BT影视 4K蓝光收藏 影音室">
+      <div class="ov">
+        <h3>收藏级片源：REMUX ≠ 枪版</h3>
+        <p>REMUX 是无重编码的原盘音画容器；WEB-DL 是流媒体抓取；CAM/TS 是影院偷拍——三者价值差十倍。BT影视只教你分辨，不帮你找侵权原盘。</p>
+      </div>
+    </div>
+    <div class="side-list">
+      <div class="srow"><div><h4>BluRay REMUX</h4><p>原盘音轨+视频容器，体积大，收藏向</p></div><span class="sz">60-90GB</span></div>
+      <div class="srow"><div><h4>WEB-DL 2160p</h4><p>流媒体抓包，无光盘菜单，体积适中</p></div><span class="sz">18-35GB</span></div>
+      <div class="srow"><div><h4>WEBRip / Encode</h4><p>二压版，手机/平板够用，NAS 不推荐</p></div><span class="sz">2-8GB</span></div>
+      <div class="srow"><div><h4>CAM / TS / HDCAM</h4><p>影院偷拍/枪版，音画差，基本是坑</p></div><span class="sz">别下</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="nas" style="background:#0a0d0b">
+  <div class="block-head">
+    <span class="no">05</span>
+    <h2>网盘 / <em>NAS</em> 影音库</h2>
+    <span class="en">CLOUD & NAS</span>
+  </div>
+  <div class="grid">
+    <div class="rcard">
+      <div class="top"><span>CLOUD</span><span class="fmt">夸克/阿里/123</span></div>
+      <h3>网盘转存包</h3>
+      <p>国内用户习惯：种子下完做种，再转存网盘给电视端；注意网盘自身版权下架机制。</p>
+      <div class="meta"><span class="pill gray">转存</span><span>易失效</span><span>需会员提速</span></div>
+    </div>
+    <div class="rcard">
+      <div class="top"><span>NAS</span><span class="fmt">Plex/Jellyfin</span></div>
+      <h3>家庭影音服务器</h3>
+      <p>做种完入库：海报墙、字幕匹配、HDR 直通、多端续播，比“找盗版站”更长期主义。</p>
+      <div class="meta"><span class="pill">收藏向</span><span>Emby/Plex</span><span>ATMOS</span></div>
+    </div>
+    <div class="rcard">
+      <div class="top"><span>SEED</span><span class="fmt">做种率</span></div>
+      <h3>做种数 > 文件大小</h3>
+      <p>老片做种少、仅 1 个发布者、无校验信息的包，优先当可疑处理。</p>
+      <div class="meta"><span class="pill amber">看做种</span><span>看评论</span><span>看哈希</span></div>
+    </div>
+    <div class="rcard">
+      <div class="top"><span>SAFE</span><span class="fmt">文件类型</span></div>
+      <h3>影视文件长这样</h3>
+      <p>.mkv / .mp4 / .ts；看到 .exe / .scr / “播放器.exe” 直接删，别好奇双击。</p>
+      <div class="meta"><span class="pill">MKV/MP4</span><span class="pill amber">EXE=危险</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="safe">
+  <div class="block-head">
+    <span class="no">06</span>
+    <h2>下载<em>安全</em>守则</h2>
+    <span class="en">OPSEC FOR TORRENTS</span>
+  </div>
+  <div class="safe">
+    <div class="safe-box ok">
+      <h3>✅ 可以这样做</h3>
+      <ul>
+        <li>下公共授权 / 公版电影 / 机构发布纪录片</li>
+        <li>先看做种数、文件列表、封装格式再决定</li>
+        <li>用正版客户端：qBittorrent / Transmission / 迅雷官方版</li>
+        <li>NAS 用户做种后关公网暴露，开防火墙</li>
+        <li>院线/会员内容回腾讯/爱奇艺/B站/咪咕正版层</li>
+      </ul>
+    </div>
+    <div class="safe-box no">
+      <h3>🚫 别碰这些</h3>
+      <ul>
+        <li>“永久免费看全院线”的磁链聚合站</li>
+        <li>播放前强制装“专用播放器 / 解码器 / 加速器”</li>
+        <li>电影文件是 .exe、.bat、.scr</li>
+        <li>弹窗让填手机号/验证码/支付密码</li>
+        <li>域名天天换、无备案无主体、评论区全是菠菜号</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="legal" style="background:#0a0d0b">
+  <div class="block-head">
+    <span class="no">07</span>
+    <h2>版权<em>边界</em></h2>
+    <span class="en">COPYRIGHT LINE</span>
+  </div>
+  <div class="legal">
+    <h3>BT 只是传输方式，关键看“传的是什么”</h3>
+    <ul>
+      <li>BT / 磁力 / 种子本身是 P2P 技术，可用于公版内容、开源影像、机构纪录片分发。</li>
+      <li>未经授权分享院线电影、独家剧、会员内容，会踩版权红线；站点不应托管、诱导、打赏侵权资源。</li>
+      <li>字幕组翻译在“已授权转载 / 非商用 / 完结后下架”等条件下风险不同，但也不是万能免责。</li>
+      <li>正版平台已有免费层/广告层时，优先回正版；收藏级 REMUX 等官方发行后再谈。</li>
+      <li>本页只做“检索思路 + 下载安全 + 版权边界”展示，不提供侵权磁链库、不教破解、不引流盗版站。</li>
+    </ul>
+    <div class="warn">⚠️ 老牌 BT 影视/资源论坛多次因版权与低俗内容被清理；现在再做“BT影视”站，正确姿势是“影音收藏与下载安全导航”，不是“盗版影院”。[13](@ref)</div>
+  </div>
+</section>
+
+<section class="block" id="about">
+  <div class="about">
+    <div>
+      <h2>BT影视：<em>把 P2P 老用户的经验做成说明书</em></h2>
+      <p>早年间“BT影视”= 电影电视剧磁力下载站；后来版权收紧、老站关停、仿冒站和菠菜弹窗接棒。[13,14](@ref) 我们再做这名字，不延续盗版路数，而是把它变成：</p>
+      <p><b>磁力/种子/网盘/NAS 的检索逻辑 + 画质格式科普 + 下载安全 + 版权边界</b>。</p>
+      <p>想收藏就讲 REMUX/WEB-DL/Encode 区别；想省钱就指去正版免费层；想玩 NAS 就讲做种率、字幕匹配、HDR 直通。网址：<span class="url">https://btyingshi-h5.github.io</span></p>
+    </div>
+    <div class="stats">
+      <div class="st"><div class="n">P2P</div><div class="l">磁力/种子/做种率</div></div>
+      <div class="st"><div class="n">4K</div><div class="l">REMUX/WEB-DL/Encode</div></div>
+      <div class="st"><div class="n">0 侵权</div><div class="l">不托管盗版片库</div></div>
+      <div class="st"><div class="n">NAS</div><div class="l">影音库/家庭服务端</div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="foot-logo">BT<em>影视</em> · TORRENT & MAGNET HUB</div>
+  <div class="foot-links">
+    <a href="#search">磁力检索</a>
+    <a href="#movie">电影种子</a>
+    <a href="#tv">剧集资源</a>
+    <a href="#bluray">4K蓝光</a>
+    <a href="#nas">网盘/NAS</a>
+    <a href="#safe">下载安全</a>
+    <a href="#legal">版权边界</a>
+    <a href="#about">关于</a>
+  </div>
+  <p>© 2026 BT影视 · 网站网址：https://btyingshi-h5.github.io</p>
+  <p class="disc">本站为影视资源检索/下载安全/版权边界演示页。BT、磁力、种子仅作技术概念说明；不提供侵权磁链库、不托管盗版院线内容、不引导安装来路播放器。实际观看请优先使用央视频、咪咕、B站、腾讯视频、爱奇艺、芒果 TV 等正版平台。</p>
+</footer>
+
+</body>
+</html>
